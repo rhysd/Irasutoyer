@@ -1,0 +1,36 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "node/node.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
+    },
+    "react/react.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
+    },
+    "react/react-dom.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
+    },
+    "redux/redux.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
+    },
+    "github-electron/github-electron.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
+    },
+    "github-electron/github-electron-main.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
+    },
+    "react-redux/react-redux.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
+    },
+    "bluebird/bluebird.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
+    },
+    "redux-thunk/redux-thunk.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
+    }
+  }
+}
