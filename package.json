@@ -28,10 +28,12 @@
   },
   "dependencies": {
     "immutable": "^3.7.5",
+    "material-ui": "^0.13.4",
     "node-irasutoya": "^1.0.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
+    "react-tap-event-plugin": "^0.2.1",
     "redux": "^3.0.4",
     "redux-thunk": "^1.0.0"
   }
