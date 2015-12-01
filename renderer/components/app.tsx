@@ -1,5 +1,6 @@
 import React = require('react');
 import {connect} from 'react-redux';
+import {Irasuto} from 'node-irasutoya';
 import List = require('material-ui/lib/lists/list');
 import ListDivider = require('material-ui/lib/lists/list-divider');
 import ListItem = require('material-ui/lib/lists/list-item');
@@ -15,8 +16,18 @@ const InsetStyle = {
     paddingTop: process.platform === 'darwin' ? '48px' : undefined
 };
 
-class App extends React.Component<{}, {}> {
-    render() {
+interface Props {
+    irasutoya?: Irasuto[];
+}
+
+class App extends React.Component<Props, {}> {
+    renderItems() {
+        const divStyle = {
+            paddingLeft: '108px',
+            paddingTop: '32px',
+            paddingBottom: '32px',
+        };
+
         const iconButton = (
             <IconButton iconClassName="menu-icon-button" tooltip="Actions">;
                 <FontIcon className="muidocs-icon-navigation-more-vert"/>
@@ -33,12 +44,21 @@ class App extends React.Component<{}, {}> {
             </IconMenu>
         );
 
-        const divStyle = {
-            paddingLeft: '108px',
-            paddingTop: '32px',
-            paddingBottom: '32px',
-        };
+        // XXX:
+        // Irasuto is too many to render
+        return this.props.irasutoya.slice(0, 10).map((irasuto, idx) =>
+            <ListItem
+                key={'item-' + idx}
+                leftAvatar={<Avatar size={72} src={irasuto.image_url} style={{borderRadius: '15%'}}/>}
+                innerDivStyle={divStyle}
+                rightIconButton={rightIconMenu}
+                primaryText={irasuto.name}
+                secondaryText={(irasuto as any).category.title}
+            />
+        );
+    }
 
+    render() {
         return (
             <div className="root" style={InsetStyle}>
                 <div className="search-input">
@@ -47,73 +67,14 @@ class App extends React.Component<{}, {}> {
                         hintText="Search..." />
                 </div>
                 <List>
-                    <ListItem
-                        leftAvatar={<Avatar size={72} src="images/ok-128.jpg" />}
-                        innerDivStyle={divStyle}
-                        rightIconButton={rightIconMenu}
-                        primaryText="Brendan Lim"
-                        secondaryText={
-                            <p>
-                                I&apos;ll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
-                            </p>
-                        }
-                        secondaryTextLines={2} />
-                    <ListDivider inset={true} />
-                    <ListItem
-                        leftAvatar={<Avatar size={72} src="images/kolage-128.jpg" />}
-                        innerDivStyle={divStyle}
-                        rightIconButton={rightIconMenu}
-                        primaryText="me, Scott, Jennifer"
-                        secondaryText={
-                            <p>
-                                Wish I could come, but I&apos;m out of town this weekend.
-                            </p>
-                        }
-                        secondaryTextLines={2} />
-                    <ListDivider inset={true} />
-                    <ListItem
-                        leftAvatar={<Avatar size={72} src="images/uxceo-128.jpg" />}
-                        innerDivStyle={divStyle}
-                        rightIconButton={rightIconMenu}
-                        primaryText="Grace Ng"
-                        secondaryText={
-                            <p>
-                                Do you have any Paris recs? Have you ever been?
-                            </p>
-                        }
-                        secondaryTextLines={2} />
-                    <ListDivider inset={true} />
-                    <ListItem
-                        leftAvatar={<Avatar size={72} src="images/kerem-128.jpg" />}
-                        innerDivStyle={divStyle}
-                        rightIconButton={rightIconMenu}
-                        primaryText="Kerem Suer"
-                        secondaryText={
-                            <p>
-                                Do you have any ideas what we can get Heidi for her birthday? How about a pony?
-                            </p>
-                        }
-                        secondaryTextLines={2} />
-                    <ListDivider inset={true} />
-                    <ListItem
-                        leftAvatar={<Avatar size={72} src="images/raquelromanp-128.jpg" />}
-                        innerDivStyle={divStyle}
-                        rightIconButton={rightIconMenu}
-                        primaryText="Raquel Parrado"
-                        secondaryText={
-                            <p>
-                                We should eat this: grated squash. Corn and tomatillo tacos.
-                            </p>
-                        }
-                        secondaryTextLines={2} />
-                    </List>
+                    {this.renderItems()}
+                </List>
             </div>
         );
     }
 }
 
 function select(state: StateType) {
-    console.log('foooooooooooo', state);
     return state;
 }
 
