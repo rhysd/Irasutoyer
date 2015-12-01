@@ -11,12 +11,14 @@ import FontIcon = require('material-ui/lib/font-icon');
 import TextField = require('material-ui/lib/text-field');
 import {StateType} from '../reducers';
 
-
+const InsetStyle = {
+    paddingTop: process.platform === 'darwin' ? '48px' : undefined
+};
 
 class App extends React.Component<{}, {}> {
     render() {
         const iconButton = (
-            <IconButton iconClassName="menu-icon-button" tooltip="GitHub">;
+            <IconButton iconClassName="menu-icon-button" tooltip="Actions">;
                 <FontIcon className="muidocs-icon-navigation-more-vert"/>
             </IconButton>
         )
@@ -38,10 +40,12 @@ class App extends React.Component<{}, {}> {
         };
 
         return (
-            <div className="root">
-                <TextField
-                    fullWidth
-                    hintText="Search..." />
+            <div className="root" style={InsetStyle}>
+                <div className="search-input">
+                    <TextField
+                        fullWidth
+                        hintText="Search..." />
+                </div>
                 <List>
                     <ListItem
                         leftAvatar={<Avatar size={72} src="images/ok-128.jpg" />}
@@ -109,6 +113,7 @@ class App extends React.Component<{}, {}> {
 }
 
 function select(state: StateType) {
+    console.log('foooooooooooo', state);
     return state;
 }
 

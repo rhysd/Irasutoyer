@@ -9,3 +9,8 @@ html, body, .app {
   width: calc(100% - 32px);
   height: 100%;
 }
+
+.search-input {
+  margin: 32px 32px 0px;
+  width: calc(100% - 64px);
+}

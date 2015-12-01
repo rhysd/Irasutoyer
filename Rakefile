@@ -30,13 +30,14 @@ file "typings" do
   sh 'tsd install'
 end
 
+# %i() is unavailable because of version of Ruby on Travis
 task :dep => [:node_modules, :typings]
 
-task :build_browser_src => %i(typings) do
+task :build_browser_src => [:typings] do
   sh "#{BIN}/tsc -p #{ROOT}/browser"
 end
 
-task :build_renderer_src do
+task :build_renderer_src => [:typings] do
   sh "#{BIN}/tsc -p #{ROOT}/renderer"
   sh "#{BIN}/browserify -d #{ROOT}/build/renderer/main.js -o #{ROOT}/build/renderer/index.js"
 end
