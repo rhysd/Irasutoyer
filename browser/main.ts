@@ -1,10 +1,12 @@
-import * as path from 'path';
-import * as app from 'app';
-import * as BrowserWindow from 'browser-window';
+import path = require('path');
+import app = require('app');
+import BrowserWindow = require('browser-window');
+import ipc = require('ipc');
 import setMenu from './menu';
 
 const index_html = 'file://' + path.join(__dirname, '..', '..', 'index.html');
 
+global.cache_path = path.join(app.getPath('userData'), 'irasutoya.json');
 app.on('ready', () => {
     let win = new BrowserWindow({
         width: 800,
@@ -24,3 +26,11 @@ app.on('ready', () => {
 
     setMenu(win);
 });
+
+ipc.on('scraping:start', (event: any) => {
+    const sender: GitHubElectron.WebContents = event.sender;
+    console.log('Scraping start (dummy)', sender);
+
+    // TODO: Temporary
+    setTimeout(() => sender.send('scraping:end'), 5000);
+})

@@ -4,19 +4,44 @@ import {Kind, ActionType} from './actions';
 
 const readFileSync = global.require('fs').readFileSync as (filename: string, encoding: string) => string;
 
+const ipc: ElectronRenderer.InProcess = global.require('ipc');
+const remote: ElectronRenderer.Remote = global.require('remote');
+
 export interface StateType {
     irasutoya: Irasuto[];
     candidates: Irasuto[];
     search: string;
+    now_scraping: boolean;
+}
+
+function loadCache(): string {'use strict';
+    try {
+        const cache_path = remote.getGlobal('cache_path') as string;
+        return readFileSync(cache_path, 'utf-8');
+    } catch(e) {
+        return null;
+    }
 }
 
 function init(): StateType {'use strict';
-    const cached = JSON.parse(readFileSync('irasutoya.json', 'utf-8'));
-    return {
-        irasutoya: cached,
-        candidates: cached,
-        search: '',
-    };
+    const contents = loadCache();
+    if (contents !== null) {
+        const cached = JSON.parse(contents);
+        return {
+            irasutoya: cached,
+            candidates: cached,
+            search: '',
+            now_scraping: false,
+        };
+    } else {
+        ipc.send('scraping:start');
+        return {
+            irasutoya: [] as Irasuto[],
+            candidates: [] as Irasuto[],
+            search: '',
+            now_scraping: false,
+        }
+    }
 }
 
 function searchUpdate(state: StateType, new_input: string) {'use strict';
@@ -31,10 +56,35 @@ function searchUpdate(state: StateType, new_input: string) {'use strict';
     return next_state;
 }
 
+function startScraping(state: StateType) {
+    const next_state = assign({}, state, {now_scraping: true});
+    ipc.send('scraping:start');
+    return next_state;
+}
+
+function endScraping(state: StateType) {
+    const contents = loadCache();
+    if (contents === null) {
+        // Give up
+        return assign({}, state, {now_scraping: false});
+    }
+
+    const cached = JSON.parse(contents);
+    return assign({}, state, {
+        now_scraping: false,
+        irasutoya: cached,
+        candidates: cached,
+    });
+}
+
 export default function irasutoyer(state: StateType = init(), action: ActionType): StateType {'use strict';
     switch (action.type) {
         case Kind.Search:
             return searchUpdate(state, action.input);
+        case Kind.StartScraping:
+            return startScraping(state);
+        case Kind.EndScraping:
+            return endScraping(state);
         default:
             break;
     }

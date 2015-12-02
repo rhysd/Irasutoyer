@@ -15,3 +15,11 @@ html, body, .app {
   height: 48px;
   width: calc(100% - 64px);
 }
+
+.scraping-button {
+  position: absolute;
+  top: 0px;
+  right: 60px;
+  margin: 8px;
+  cursor: pointer;
+}

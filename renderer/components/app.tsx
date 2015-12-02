@@ -4,6 +4,7 @@ import {Irasuto} from 'node-irasutoya';
 import {StateType} from '../reducers';
 import IrasutoList from './irasuto-list';
 import IrasutoSearch from './irasuto-search';
+import ScrapingButton from './scraping-button';
 
 const InsetStyle = {
     paddingTop: process.platform === 'darwin' ? '48px' : undefined
@@ -12,14 +13,16 @@ const InsetStyle = {
 interface Props {
     candidates?: Irasuto[];
     dispatch?: Redux.Dispatch;
+    nowScraping?: boolean;
 }
 
 class App extends React.Component<Props, {}> {
     render() {
-        const {candidates, dispatch} = this.props;
+        const {candidates, dispatch, nowScraping} = this.props;
         return (
             <div className="root" style={InsetStyle}>
                 <IrasutoSearch dispatch={dispatch}/>
+                <ScrapingButton dispatch={dispatch} nowScraping={nowScraping}/>
                 <IrasutoList irasutoya={candidates}/>
             </div>
         );
@@ -28,7 +31,8 @@ class App extends React.Component<Props, {}> {
 
 function select(state: StateType) {
     return {
-        candidates: state.candidates
+        candidates: state.candidates,
+        nowScraping: state.now_scraping,
     };
 }
 

@@ -37,10 +37,18 @@ export default class IrasutoItem extends React.Component<Props, {}> {
             </IconMenu>
         );
 
+        const irasutoAvatar = (
+            <Avatar
+                size={72}
+                src={irasuto.image_url}
+                style={{borderRadius: '15%'}}
+            />
+        );
+
         return (
             <ListItem
                 key={key}
-                leftAvatar={<Avatar size={72} src={irasuto.image_url} style={{borderRadius: '15%'}}/>}
+                leftAvatar={irasutoAvatar}
                 innerDivStyle={divStyle}
                 rightIconButton={rightIconMenu}
                 primaryText={irasuto.name}
