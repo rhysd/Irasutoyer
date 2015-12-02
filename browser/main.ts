@@ -3,6 +3,7 @@ import fs = require('fs');
 import app = require('app');
 import BrowserWindow = require('browser-window');
 import ipc = require('ipc');
+import he = require('he');
 import setMenu from './menu';
 import {fetchAllIrasuto, Irasutoya} from 'node-irasutoya';
 
@@ -32,7 +33,7 @@ app.on('ready', () => {
 function scrape() {
     return fetchAllIrasuto().then((map: Irasutoya) => {
         const o = {} as {[c: string]: any[]};
-        map.forEach((v, k) => { o[k] = v; });
+        map.forEach((v, k) => { o[he.decode(k)] = v; });
         return JSON.stringify(o);
     });
 }
