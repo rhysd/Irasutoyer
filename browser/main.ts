@@ -34,8 +34,11 @@ function scrape() {
     return fetchAllIrasuto().then((map: Irasutoya) => {
         return JSON.stringify(
                 Array.from(map.values()).reduce(
-                    (acc, irasuto) => {
-                        acc.push.apply(acc, irasuto);
+                    (acc: Irasuto[], irasuto: Irasuto[]) => {
+                        for (const i of irasuto) {
+                            i.name = he.decode(i.name);
+                            acc.push(i);
+                        }
                         return acc;
                     },
                     [] as Irasuto[]
@@ -48,9 +51,7 @@ ipc.on('scraping:start', (event: any) => {
     const sender: GitHubElectron.WebContents = event.sender;
     console.log('Scraping start');
 
-    fetchAllIrasuto()
-        .then((map: Irasutoya) => JSON.stringify(Array.from(map.values())))
-        .then((json: string) => {
+    scrape().then((json: string) => {
             fs.writeFileSync(global.cache_path, json, 'utf8');
             sender.send('scraping:end');
         }).catch(e => {

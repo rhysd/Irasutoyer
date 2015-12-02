@@ -33,7 +33,7 @@
     "he": "^0.5.0",
     "immutable": "^3.7.5",
     "material-ui": "^0.13.4",
-    "node-irasutoya": "^1.0.1",
+    "node-irasutoya": "^1.0.7",
     "object-assign": "^4.0.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
