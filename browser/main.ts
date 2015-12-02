@@ -1,8 +1,10 @@
 import path = require('path');
+import fs = require('fs');
 import app = require('app');
 import BrowserWindow = require('browser-window');
 import ipc = require('ipc');
 import setMenu from './menu';
+import {fetchAllIrasuto, Irasutoya} from 'node-irasutoya';
 
 const index_html = 'file://' + path.join(__dirname, '..', '..', 'index.html');
 
@@ -27,10 +29,22 @@ app.on('ready', () => {
     setMenu(win);
 });
 
+function scrape() {
+    return fetchAllIrasuto().then((map: Irasutoya) => {
+        const o = {} as {[c: string]: any[]};
+        map.forEach((v, k) => { o[k] = v; });
+        return JSON.stringify(o);
+    });
+}
+
 ipc.on('scraping:start', (event: any) => {
     const sender: GitHubElectron.WebContents = event.sender;
     console.log('Scraping start (dummy)', sender);
 
-    // TODO: Temporary
-    setTimeout(() => sender.send('scraping:end'), 5000);
+    scrape().then((json: string) => {
+        fs.writeFileSync(global.cache_path, json, 'utf8');
+        sender.send('scraping:end');
+    }).catch(e => {
+        sender.send('scraping:error', e);
+    });
 })
