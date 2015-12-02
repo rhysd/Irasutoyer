@@ -41,7 +41,7 @@ function init(): StateType {'use strict';
             irasutoya: [] as Irasuto[],
             candidates: [] as Irasuto[],
             search: '',
-            now_scraping: false,
+            now_scraping: true,
             scraping_error: null,
         }
     }

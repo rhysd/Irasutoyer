@@ -6,3 +6,6 @@ declare module NodeJS {
     }
 }
 
+interface ArrayConstructor {
+    from<I>(iterable: I): any[];
+}

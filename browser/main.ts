@@ -5,7 +5,7 @@ import BrowserWindow = require('browser-window');
 import ipc = require('ipc');
 import he = require('he');
 import setMenu from './menu';
-import {fetchAllIrasuto, Irasutoya} from 'node-irasutoya';
+import {fetchAllIrasuto, Irasutoya, Irasuto} from 'node-irasutoya';
 
 const index_html = 'file://' + path.join(__dirname, '..', '..', 'index.html');
 
@@ -32,20 +32,20 @@ app.on('ready', () => {
 
 function scrape() {
     return fetchAllIrasuto().then((map: Irasutoya) => {
-        const o = {} as {[c: string]: any[]};
-        map.forEach((v, k) => { o[he.decode(k)] = v; });
-        return JSON.stringify(o);
+        return JSON.stringify(Array.from(map.values()));
     });
 }
 
 ipc.on('scraping:start', (event: any) => {
     const sender: GitHubElectron.WebContents = event.sender;
-    console.log('Scraping start (dummy)', sender);
+    console.log('Scraping start');
 
-    scrape().then((json: string) => {
-        fs.writeFileSync(global.cache_path, json, 'utf8');
-        sender.send('scraping:end');
-    }).catch(e => {
-        sender.send('scraping:error', e);
-    });
+    fetchAllIrasuto()
+        .then((map: Irasutoya) => JSON.stringify(Array.from(map.values())))
+        .then((json: string) => {
+            fs.writeFileSync(global.cache_path, json, 'utf8');
+            sender.send('scraping:end');
+        }).catch(e => {
+            sender.send('scraping:error', e);
+        });
 })
