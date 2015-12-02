@@ -30,8 +30,8 @@ class App extends React.Component<Props, {}> {
         };
 
         const iconButton = (
-            <IconButton iconClassName="menu-icon-button" tooltip="Actions">;
-                <FontIcon className="muidocs-icon-navigation-more-vert"/>
+            <IconButton tooltip="Actions">;
+                <FontIcon className="material-icons">more_vert</FontIcon>
             </IconButton>
         )
 
