@@ -10,22 +10,26 @@ const InsetStyle = {
 };
 
 interface Props {
-    irasutoya?: Irasuto[];
+    candidates?: Irasuto[];
+    dispatch?: Redux.Dispatch;
 }
 
 class App extends React.Component<Props, {}> {
     render() {
+        const {candidates, dispatch} = this.props;
         return (
             <div className="root" style={InsetStyle}>
-                <IrasutoSearch/>
-                <IrasutoList irasutoya={this.props.irasutoya}/>
+                <IrasutoSearch dispatch={dispatch}/>
+                <IrasutoList irasutoya={candidates}/>
             </div>
         );
     }
 }
 
 function select(state: StateType) {
-    return state;
+    return {
+        candidates: state.candidates
+    };
 }
 
 export default connect(select)(App);

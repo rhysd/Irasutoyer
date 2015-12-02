@@ -60,3 +60,6 @@ declare module ElectronRenderer {
     }
 }
 
+interface String {
+    startsWith(str: string): boolean;
+}

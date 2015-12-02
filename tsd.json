@@ -49,6 +49,9 @@
     },
     "envify/envify.d.ts": {
       "commit": "4910a7c52a1cf335877ea3b0917eb65117a66637"
+    },
+    "object-assign/object-assign.d.ts": {
+      "commit": "4910a7c52a1cf335877ea3b0917eb65117a66637"
     }
   }
 }
