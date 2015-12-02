@@ -9,7 +9,8 @@ app.on('ready', () => {
     let win = new BrowserWindow({
         width: 800,
         height: 1000,
-        'title-bar-style': 'hidden-inset',
+        'title-bar-style': process.platform === 'darwin' ? 'hidden-inset' : undefined,
+        'use-content-size': true,
     });
 
     win.on('closed', () => {

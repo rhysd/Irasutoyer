@@ -46,6 +46,9 @@
     },
     "es6-collections/es6-collections.d.ts": {
       "commit": "7a3d6944036902996b87981e6150900952b35628"
+    },
+    "envify/envify.d.ts": {
+      "commit": "4910a7c52a1cf335877ea3b0917eb65117a66637"
     }
   }
 }

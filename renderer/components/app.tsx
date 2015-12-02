@@ -10,6 +10,7 @@ import IconMenu = require('material-ui/lib/menus/icon-menu');
 import IconButton = require('material-ui/lib/icon-button');
 import FontIcon = require('material-ui/lib/font-icon');
 import TextField = require('material-ui/lib/text-field');
+import Infinite = require('react-infinite');
 import {StateType} from '../reducers';
 
 const InsetStyle = {
@@ -44,9 +45,11 @@ class App extends React.Component<Props, {}> {
             </IconMenu>
         );
 
-        // XXX:
-        // Irasuto is too many to render
-        return this.props.irasutoya.slice(0, 10).map((irasuto, idx) =>
+        const itemStyle = {
+            height: '108px'
+        };
+
+        return this.props.irasutoya.map((irasuto, idx) =>
             <ListItem
                 key={'item-' + idx}
                 leftAvatar={<Avatar size={72} src={irasuto.image_url} style={{borderRadius: '15%'}}/>}
@@ -54,6 +57,7 @@ class App extends React.Component<Props, {}> {
                 rightIconButton={rightIconMenu}
                 primaryText={irasuto.name}
                 secondaryText={(irasuto as any).category.title}
+                style={itemStyle}
             />
         );
     }
@@ -66,8 +70,10 @@ class App extends React.Component<Props, {}> {
                         fullWidth
                         hintText="Search..." />
                 </div>
-                <List>
-                    {this.renderItems()}
+                <List style={{height: '888px'}}>
+                    <Infinite elementHeight={108} containerHeight={888}>
+                        {this.renderItems()}
+                    </Infinite>
                 </List>
             </div>
         );
