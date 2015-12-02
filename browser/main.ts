@@ -32,7 +32,15 @@ app.on('ready', () => {
 
 function scrape() {
     return fetchAllIrasuto().then((map: Irasutoya) => {
-        return JSON.stringify(Array.from(map.values()));
+        return JSON.stringify(
+                Array.from(map.values()).reduce(
+                    (acc, irasuto) => {
+                        acc.push.apply(acc, irasuto);
+                        return acc;
+                    },
+                    [] as Irasuto[]
+                )
+            );
     });
 }
 

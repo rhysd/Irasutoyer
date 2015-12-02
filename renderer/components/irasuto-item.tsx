@@ -52,7 +52,7 @@ export default class IrasutoItem extends React.Component<Props, {}> {
                 innerDivStyle={divStyle}
                 rightIconButton={rightIconMenu}
                 primaryText={irasuto.name}
-                secondaryText={(irasuto as any).category.title}
+                secondaryText={irasuto.category.title}
                 style={{height: '108px'}}
                 onClick={() => openExternal(irasuto.detail_url)}
             />
