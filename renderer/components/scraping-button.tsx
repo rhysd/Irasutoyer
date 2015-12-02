@@ -9,7 +9,9 @@ interface Props {
 
 export default class ScrapingButton extends React.Component<Props, {}> {
     onClick() {
-        this.props.dispatch(startScraping());
+        if (!this.props.nowScraping) {
+            this.props.dispatch(startScraping());
+        }
     }
 
     render() {
