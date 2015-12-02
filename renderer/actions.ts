@@ -4,12 +4,14 @@ export enum Kind {
     EndScraping,
     FailedScraping,
     ClearScrapingError,
+    SelectItem,
 }
 
 export interface ActionType {
     type: Kind;
     input?: string;
     error?: Error;
+    offset?: number;
 }
 
 export function search(input: string) { 'use strict';
@@ -44,3 +46,9 @@ export function clearScrapingError() { 'use strict';
     };
 }
 
+export function selectItem(offset: number) { 'use strict';
+    return {
+        type: Kind.SelectItem,
+        offset,
+    };
+}

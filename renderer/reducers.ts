@@ -6,6 +6,7 @@ const readFileSync = global.require('fs').readFileSync as (filename: string, enc
 
 const ipc: ElectronRenderer.InProcess = global.require('ipc');
 const remote: ElectronRenderer.Remote = global.require('remote');
+const openExternal: (url: string) => boolean = global.require('shell').openExternal;
 
 export interface StateType {
     irasutoya: Irasuto[];
@@ -88,6 +89,14 @@ function clearError(state: StateType) {'use strict';
     return assign({}, state, {scraping_error: null});
 }
 
+function selectItem(state: StateType, offset: number) {'use strict';
+    const c = state.candidates[offset];
+    if (c) {
+        openExternal(c.detail_url);
+    }
+    return state;
+}
+
 export default function irasutoyer(state: StateType = init(), action: ActionType): StateType {'use strict';
     switch (action.type) {
         case Kind.Search:
@@ -100,6 +109,8 @@ export default function irasutoyer(state: StateType = init(), action: ActionType
             return setError(state, action.error);
         case Kind.ClearScrapingError:
             return clearError(state);
+        case Kind.SelectItem:
+            return selectItem(state, action.offset);
         default:
             return state;
     }

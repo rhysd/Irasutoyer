@@ -1,6 +1,6 @@
 import React = require('react');
 import TextField = require('material-ui/lib/text-field');
-import {search} from '../actions';
+import {search, selectItem} from '../actions';
 
 interface Props {
     dispatch: Redux.Dispatch;
@@ -23,6 +23,7 @@ export default class IrasutoSearch extends React.Component<Props, {}> {
                     fullWidth
                     hintText="Search..."
                     onChange={this.onChange.bind(this)}
+                    onEnterKeyDown={() => this.props.dispatch(selectItem(0))}
                     ref="text_field"
                 />
             </div>
