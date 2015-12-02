@@ -25,7 +25,7 @@ file 'node_modules' do
   sh 'npm install'
 end
 
-file "typings" do
+file 'typings' do
   ensure_cmd 'tsd'
   sh 'tsd install'
 end
@@ -38,8 +38,9 @@ task :build_browser_src => [:typings] do
 end
 
 task :build_renderer_src => [:typings] do
+  mkdir_p "#{ROOT}/build/renderer"
   sh "#{BIN}/tsc -p #{ROOT}/renderer"
-  sh "#{BIN}/browserify -d #{ROOT}/build/renderer/main.js -o #{ROOT}/build/renderer/index.js"
+  sh "#{BIN}/browserify -d #{ROOT}/renderer/out/main.js -o #{ROOT}/build/renderer/index.js"
 end
 
 task :build => [:dep, :build_browser_src, :build_renderer_src]

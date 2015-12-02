@@ -12,8 +12,9 @@
     "url": "https://github.com/rhysd/Irasutoyer.git"
   },
   "scripts": {
-    "run": "electron .",
+    "run": "node bin/cli.js",
     "dep": "tsd install && npm install",
+    "build": "rake build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

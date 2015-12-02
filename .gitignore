@@ -5,3 +5,4 @@ npm-debug.log
 /build
 /bower_components
 /irasutoya.json
+/renderer/out
