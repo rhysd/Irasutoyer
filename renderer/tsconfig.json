@@ -11,6 +11,9 @@
   },
   "files": [
     "components/app.tsx",
+    "components/irasuto-list.tsx",
+    "components/irasuto-item.tsx",
+    "components/irasuto-search.tsx",
     "store.ts",
     "reducers.ts",
     "actions.ts",
