@@ -12,6 +12,7 @@ export interface StateType {
     candidates: Irasuto[];
     search: string;
     now_scraping: boolean;
+    scraping_error: Error;
 }
 
 function loadCache(): string {'use strict';
@@ -32,6 +33,7 @@ function init(): StateType {'use strict';
             candidates: cached,
             search: '',
             now_scraping: false,
+            scraping_error: null,
         };
     } else {
         ipc.send('scraping:start');
@@ -40,6 +42,7 @@ function init(): StateType {'use strict';
             candidates: [] as Irasuto[],
             search: '',
             now_scraping: false,
+            scraping_error: null,
         }
     }
 }
@@ -56,13 +59,13 @@ function searchUpdate(state: StateType, new_input: string) {'use strict';
     return next_state;
 }
 
-function startScraping(state: StateType) {
+function startScraping(state: StateType) {'use strict';
     const next_state = assign({}, state, {now_scraping: true});
     ipc.send('scraping:start');
     return next_state;
 }
 
-function endScraping(state: StateType) {
+function endScraping(state: StateType) {'use strict';
     const contents = loadCache();
     if (contents === null) {
         // Give up
@@ -77,6 +80,14 @@ function endScraping(state: StateType) {
     });
 }
 
+function setError(state: StateType, err: Error) {'use strict';
+    return assign({}, state, {scraping_error: err});
+}
+
+function clearError(state: StateType) {'use strict';
+    return assign({}, state, {scraping_error: null});
+}
+
 export default function irasutoyer(state: StateType = init(), action: ActionType): StateType {'use strict';
     switch (action.type) {
         case Kind.Search:
@@ -85,8 +96,11 @@ export default function irasutoyer(state: StateType = init(), action: ActionType
             return startScraping(state);
         case Kind.EndScraping:
             return endScraping(state);
+        case Kind.FailedScraping:
+            return setError(state, action.error);
+        case Kind.ClearScrapingError:
+            return clearError(state);
         default:
-            break;
+            return state;
     }
-    return state;
 }
