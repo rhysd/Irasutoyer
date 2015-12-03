@@ -46,7 +46,21 @@ function init(): StateType {'use strict';
     return s;
 }
 
+function shouldSurvive(i: Irasuto, search_words: string[]) {'use strict';
+    for (const s of search_words) {
+        if (i.name.indexOf(s) === -1) {
+            return false;
+        }
+    }
+    return true;
+}
+
 function searchUpdate(state: StateType, new_input: string) {'use strict';
+    new_input = new_input.trim();
+    if (state.search === new_input) {
+        return state;
+    }
+
     const next_state = assign({}, state, {search: new_input});
 
     if (new_input === '') {
@@ -54,7 +68,8 @@ function searchUpdate(state: StateType, new_input: string) {'use strict';
         return next_state;
     }
 
-    next_state.candidates = state.irasutoya.filter(i => i.name.indexOf(new_input) !== -1);
+    const words = new_input.split(/\s+/);
+    next_state.candidates = state.irasutoya.filter(i => shouldSurvive(i, words));
     return next_state;
 }
 
