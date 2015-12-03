@@ -25,8 +25,6 @@ app.on('ready', () => {
 
     win.loadURL(index_html);
 
-    win.webContents.openDevTools({detach: true});
-
     setMenu(win);
 });
 
@@ -49,8 +47,6 @@ function scrape() {
 
 ipc.on('scraping:start', (event: any) => {
     const sender: GitHubElectron.WebContents = event.sender;
-    console.log('Scraping start');
-
     scrape().then((json: string) => {
             fs.writeFileSync(global.cache_path, json, 'utf8');
             sender.send('scraping:end');

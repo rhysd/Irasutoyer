@@ -9,11 +9,17 @@ This is a desktop app for [いらすとや(Irasutoya)](http://www.irasutoya.com/
 
 This application is built on [Electron](https://github.com/atom/electron), [React](https://facebook.github.io/react/), [Redux](https://github.com/rackt/redux), and [material-ui](http://www.material-ui.com/#/).
 
-TODO: Screenshot
+![screenshot on Linux](https://raw.githubusercontent.com/rhysd/ss/master/Irasutoyer/Irasutoyer-linux.png)
+
 
 ## Installation
 
-`npm` package is not provided yet.  Clone and build app.
+- [npm](https://www.npmjs.com/) package
+
+```
+$ npm install -g irasutoyer electron-prebuilt
+$ irasutoyer
+```
 
 
 ## Usage

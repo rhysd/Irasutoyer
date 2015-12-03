@@ -15,12 +15,10 @@ ReactDom.render(
 );
 
 ipc.on('scraping:end', () => {
-    console.log('Sraping end.');
     Store.dispatch(endScraping());
 });
 
 ipc.on('scraping:error', (e: Error) => {
-    console.log('Sraping error.', e);
     Store.dispatch(failedScraping(e));
 });
 
