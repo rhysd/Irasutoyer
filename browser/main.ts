@@ -31,20 +31,20 @@ app.on('ready', () => {
 });
 
 function scrape() {
-    return fetchAllIrasuto().then((map: Irasutoya) => {
-        return JSON.stringify(
-                Array.from(map.values()).reduce(
-                    (acc: Irasuto[], irasuto: Irasuto[]) => {
-                        for (const i of irasuto) {
-                            i.name = he.decode(i.name);
-                            acc.push(i);
-                        }
-                        return acc;
-                    },
-                    [] as Irasuto[]
-                )
-            );
-    });
+    return fetchAllIrasuto().then((map: Irasutoya) =>
+        JSON.stringify(
+            Array.from(map.values()).reduce(
+                (acc: Irasuto[], irasuto: Irasuto[]) => {
+                    for (const i of irasuto) {
+                        i.name = he.decode(i.name);
+                        acc.push(i);
+                    }
+                    return acc;
+                },
+                [] as Irasuto[]
+            )
+        )
+    );
 }
 
 ipc.on('scraping:start', (event: any) => {

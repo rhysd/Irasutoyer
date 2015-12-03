@@ -27,25 +27,23 @@ function loadCache(): string {'use strict';
 
 function init(): StateType {'use strict';
     const contents = loadCache();
+    const s: StateType = {
+        irasutoya: [] as Irasuto[],
+        candidates: [] as Irasuto[],
+        search: '',
+        now_scraping: false,
+        scraping_error: null,
+    };
+
     if (contents !== null) {
-        const cached = JSON.parse(contents);
-        return {
-            irasutoya: cached,
-            candidates: cached,
-            search: '',
-            now_scraping: false,
-            scraping_error: null,
-        };
+        s.irasutoya = JSON.parse(contents);
+        s.candidates = s.irasutoya;
     } else {
         ipc.send('scraping:start');
-        return {
-            irasutoya: [] as Irasuto[],
-            candidates: [] as Irasuto[],
-            search: '',
-            now_scraping: true,
-            scraping_error: null,
-        }
+        s.now_scraping = true;
     }
+
+    return s;
 }
 
 function searchUpdate(state: StateType, new_input: string) {'use strict';

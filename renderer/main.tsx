@@ -19,7 +19,8 @@ ipc.on('scraping:end', () => {
     Store.dispatch(endScraping());
 });
 
-ipc.on('scraping:error', (_: Event, e: Error) => {
+ipc.on('scraping:error', (e: Error) => {
     console.log('Sraping error.', e);
     Store.dispatch(failedScraping(e));
 });
+
