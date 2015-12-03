@@ -25,7 +25,7 @@ app.on('ready', () => {
 
     win.loadURL(index_html);
 
-    setMenu(win);
+    setMenu();
 });
 
 function scrape() {
