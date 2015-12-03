@@ -7,8 +7,11 @@ import Avatar = require('material-ui/lib/avatar');
 import FontIcon = require('material-ui/lib/font-icon');
 import ListItem = require('material-ui/lib/lists/list-item');
 import ListDivider = require('material-ui/lib/lists/list-divider');
+import {TouchTapEvent} from 'material-ui';
 
 const openExternal = global.require('shell').openExternal as (uri: string) => boolean;
+const clipboard = global.require('clipboard');
+const writeText: (text: string, type?: string) => void = clipboard.writeText;
 
 interface Props {
     irasuto: Irasuto;
@@ -16,6 +19,30 @@ interface Props {
 }
 
 export default class IrasutoItem extends React.Component<Props, {}> {
+    onItemSelected(e: TouchTapEvent, item: React.ReactElement<any>) {
+        e.preventDefault();
+
+        const irasuto = this.props.irasuto;
+
+        switch (item.key) {
+            case 'copy-url-to-clipboard': {
+                writeText:(irasuto.detail_url);
+                console.log('write!', writeText, this.props.irasuto.detail_url);
+                break;
+            }
+            case 'copy-image-to-clipboard': {
+                // TODO
+                break;
+            }
+            case 'open-category': {
+                openExternal(irasuto.category.url);
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
     render() {
         const {irasuto, key} = this.props;
 
@@ -32,9 +59,10 @@ export default class IrasutoItem extends React.Component<Props, {}> {
         );
 
         const rightIconMenu = (
-            <IconMenu iconButtonElement={iconButton}>
-                <MenuItem primaryText="Copy URL to Clipboard" />
-                <MenuItem primaryText="Open Category" />
+            <IconMenu iconButtonElement={iconButton} onItemTouchTap={this.onItemSelected.bind(this)}>
+                <MenuItem primaryText="Copy URL to Clipboard" key="copy-url-to-clipboard"/>
+                <MenuItem primaryText="Copy Image to Clipboard" key="copy-image-to-clipboard"/>
+                <MenuItem primaryText="Open Category" key="open-category"/>
             </IconMenu>
         );
 
@@ -55,7 +83,7 @@ export default class IrasutoItem extends React.Component<Props, {}> {
                     primaryText={irasuto.name}
                     secondaryText={irasuto.category.title}
                     style={{height: '108px'}}
-                    onClick={() => openExternal(irasuto.detail_url)}
+                    onTouchTap={() => openExternal(irasuto.detail_url)}
                 />
                 <ListDivider inset/>
             </div>

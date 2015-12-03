@@ -62,3 +62,10 @@ declare module ElectronRenderer {
 interface String {
     startsWith(str: string): boolean;
 }
+
+declare module "react-tap-event-plugin" {
+    function injectTapEventPlugin(): void;
+    export = injectTapEventPlugin;
+}
+
+
