@@ -65,7 +65,7 @@ export default class IrasutoItem extends React.Component<Props, {}> {
         );
 
         const rightIconMenu = (
-            <IconMenu iconButtonElement={iconButton} onItemTouchTap={this.onItemSelected.bind(this)}>
+            <IconMenu desktop iconButtonElement={iconButton} onItemTouchTap={this.onItemSelected.bind(this)}>
                 <MenuItem primaryText="Copy URL to Clipboard" key="copy-url-to-clipboard"/>
                 <MenuItem primaryText="Copy Markdown Link to Clipboard" key="copy-md-link-to-clipboard"/>
                 <MenuItem primaryText="Copy Image to Clipboard" key="copy-image-to-clipboard"/>

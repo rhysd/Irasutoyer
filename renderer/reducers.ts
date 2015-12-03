@@ -95,7 +95,7 @@ function endScraping(state: StateType) {'use strict';
 }
 
 function setError(state: StateType, err: Error) {'use strict';
-    return assign({}, state, {scraping_error: err});
+    return assign({}, state, {scraping_error: err, now_scraping: false});
 }
 
 function clearError(state: StateType) {'use strict';
