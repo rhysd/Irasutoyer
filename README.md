@@ -30,7 +30,13 @@ It takes long time (10 minutes or more).  I recommend you to make a cup of coffe
 After scraping succeeds, all illustrations would be listed in window.  You can search incrementally by entering search words to a text area on the top of window.
 All links are cached as json in user directory.  If you want to update the cache, click the circle button on right above of the window.
 
-If you find the illustration you want, click the item in list to open illustration page in browser.
+If you find the illustration you want, click the item in list to open illustration page in browser.  You can also click 'Actions' button in right hand side of item.
+You can do below actions as well.
+
+- Copy URL to clipboard
+- Copy markdown format link to clipboard
+- Copy thumbnail image to clipboard
+- Open category page in your browser
 
 
 ## Development

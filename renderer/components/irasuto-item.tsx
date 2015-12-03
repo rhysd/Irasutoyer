@@ -12,6 +12,8 @@ import {TouchTapEvent} from 'material-ui';
 const openExternal = global.require('shell').openExternal as (uri: string) => boolean;
 const clipboard = global.require('clipboard');
 const writeText: (text: string, type?: string) => void = clipboard.writeText;
+const writeImage: (image: GitHubElectron.NativeImage) => void = clipboard.writeImage;
+const NativeImage = global.require('native-image') as typeof GitHubElectron.NativeImage;
 
 interface Props {
     irasuto: Irasuto;
@@ -26,12 +28,15 @@ export default class IrasutoItem extends React.Component<Props, {}> {
 
         switch (item.key) {
             case 'copy-url-to-clipboard': {
-                writeText:(irasuto.detail_url);
-                console.log('write!', writeText, this.props.irasuto.detail_url);
+                writeText(irasuto.detail_url);
+                break;
+            }
+            case 'copy-md-link-to-clipboard': {
+                writeText(`[${irasuto.name}](${irasuto.detail_url})`);
                 break;
             }
             case 'copy-image-to-clipboard': {
-                // TODO
+                writeImage(NativeImage.createFromDataURL(irasuto.image_url));
                 break;
             }
             case 'open-category': {
@@ -39,6 +44,7 @@ export default class IrasutoItem extends React.Component<Props, {}> {
                 break;
             }
             default:
+                console.error(`Invalid action name: ${item.key}`);
                 break;
         }
     }
@@ -61,6 +67,7 @@ export default class IrasutoItem extends React.Component<Props, {}> {
         const rightIconMenu = (
             <IconMenu iconButtonElement={iconButton} onItemTouchTap={this.onItemSelected.bind(this)}>
                 <MenuItem primaryText="Copy URL to Clipboard" key="copy-url-to-clipboard"/>
+                <MenuItem primaryText="Copy Markdown Link to Clipboard" key="copy-md-link-to-clipboard"/>
                 <MenuItem primaryText="Copy Image to Clipboard" key="copy-image-to-clipboard"/>
                 <MenuItem primaryText="Open Category" key="open-category"/>
             </IconMenu>
