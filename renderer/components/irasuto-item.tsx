@@ -6,6 +6,7 @@ import MenuItem = require('material-ui/lib/menus/menu-item');
 import Avatar = require('material-ui/lib/avatar');
 import FontIcon = require('material-ui/lib/font-icon');
 import ListItem = require('material-ui/lib/lists/list-item');
+import ListDivider = require('material-ui/lib/lists/list-divider');
 
 const openExternal = global.require('shell').openExternal as (uri: string) => boolean;
 
@@ -46,16 +47,18 @@ export default class IrasutoItem extends React.Component<Props, {}> {
         );
 
         return (
-            <ListItem
-                key={key}
-                leftAvatar={irasutoAvatar}
-                innerDivStyle={divStyle}
-                rightIconButton={rightIconMenu}
-                primaryText={irasuto.name}
-                secondaryText={irasuto.category.title}
-                style={{height: '108px'}}
-                onClick={() => openExternal(irasuto.detail_url)}
-            />
+            <div key={key}>
+                <ListItem
+                    leftAvatar={irasutoAvatar}
+                    innerDivStyle={divStyle}
+                    rightIconButton={rightIconMenu}
+                    primaryText={irasuto.name}
+                    secondaryText={irasuto.category.title}
+                    style={{height: '108px'}}
+                    onClick={() => openExternal(irasuto.detail_url)}
+                />
+                <ListDivider inset/>
+            </div>
         );
     }
 }
