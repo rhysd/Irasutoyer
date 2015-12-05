@@ -39,10 +39,6 @@ export default class IrasutoItem extends React.Component<Props, {}> {
                 writeImage(NativeImage.createFromDataURL(irasuto.image_url));
                 break;
             }
-            case 'open-category': {
-                openExternal(irasuto.category.url);
-                break;
-            }
             default:
                 console.error(`Invalid action name: ${item.key}`);
                 break;
@@ -69,14 +65,13 @@ export default class IrasutoItem extends React.Component<Props, {}> {
                 <MenuItem primaryText="Copy URL to Clipboard" key="copy-url-to-clipboard"/>
                 <MenuItem primaryText="Copy Markdown Link to Clipboard" key="copy-md-link-to-clipboard"/>
                 <MenuItem primaryText="Copy Image to Clipboard" key="copy-image-to-clipboard"/>
-                <MenuItem primaryText="Open Category" key="open-category"/>
             </IconMenu>
         );
 
         const irasutoAvatar = (
             <Avatar
                 size={72}
-                src={irasuto.image_url}
+                src={irasuto.mini_image_url}
                 style={{borderRadius: '15%'}}
             />
         );
@@ -88,7 +83,7 @@ export default class IrasutoItem extends React.Component<Props, {}> {
                     innerDivStyle={divStyle}
                     rightIconButton={rightIconMenu}
                     primaryText={irasuto.name}
-                    secondaryText={irasuto.category.title}
+                    secondaryText={irasuto.categories.join(' ')}
                     style={{height: '108px'}}
                     onTouchTap={() => openExternal(irasuto.detail_url)}
                 />

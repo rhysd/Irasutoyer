@@ -1,12 +1,14 @@
 import {Irasuto} from 'node-irasutoya';
 import assign = require('object-assign');
 import {Kind, ActionType} from './actions';
+import path = require('path');
 
 const readFileSync = global.require('fs').readFileSync as (filename: string, encoding: string) => string;
 
 const ipc: ElectronRenderer.InProcess = global.require('ipc');
 const remote: ElectronRenderer.Remote = global.require('remote');
 const openExternal: (url: string) => boolean = global.require('shell').openExternal;
+const AppPath: string = remote.require('app').getAppPath();
 
 export interface StateType {
     irasutoya: Irasuto[];
@@ -18,10 +20,13 @@ export interface StateType {
 
 function loadCache(): string {'use strict';
     try {
-        const cache_path = remote.getGlobal('cache_path') as string;
-        return readFileSync(cache_path, 'utf-8');
+        return readFileSync(remote.getGlobal('cache_path') as string, 'utf-8');
     } catch(e) {
-        return null;
+        try {
+            return readFileSync(path.join(AppPath, 'irasutoya.json'), 'utf-8');
+        } catch(e) {
+            return null;
+        }
     }
 }
 

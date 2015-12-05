@@ -1,11 +1,11 @@
 Irasutoyer
 ==========
 
-This is a desktop app for [いらすとや(Irasutoya)](http://www.irasutoya.com/) lovers.  You can search many (3000+) illustrations incrementally and access the illustration page quickly.
+This is a desktop app for [いらすとや(Irasutoya)](http://www.irasutoya.com/) lovers.  You can search many (10000+) illustrations incrementally and access the illustration page quickly.
 
 - __Cross Platform__: Available on OS X, Linux, (hopefully) Windows.
 - __Simplicity__: Simplistic UI and no configuration.
-- __High Performance__: You can see and search the very long (3000+ items) list.
+- __High Performance__: You can see and search the very long (10000+ items) list.
 
 This application is built on [Electron](https://github.com/atom/electron), [React](https://facebook.github.io/react/), [Redux](https://github.com/rackt/redux), and [material-ui](http://www.material-ui.com/#/).
 

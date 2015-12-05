@@ -29,9 +29,6 @@
     "bluebird/bluebird.d.ts": {
       "commit": "7a3d6944036902996b87981e6150900952b35628"
     },
-    "redux-thunk/redux-thunk.d.ts": {
-      "commit": "7a3d6944036902996b87981e6150900952b35628"
-    },
     "material-ui/material-ui.d.ts": {
       "commit": "7a3d6944036902996b87981e6150900952b35628"
     },
@@ -52,9 +49,6 @@
     },
     "object-assign/object-assign.d.ts": {
       "commit": "4910a7c52a1cf335877ea3b0917eb65117a66637"
-    },
-    "he/he.d.ts": {
-      "commit": "715df764419937a75a25dcd76bfc954157bc7b96"
     }
   }
 }
