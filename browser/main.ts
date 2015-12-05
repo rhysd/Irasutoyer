@@ -3,7 +3,6 @@ import fs = require('fs');
 import app = require('app');
 import BrowserWindow = require('browser-window');
 import ipc = require('ipc');
-import he = require('he');
 import setMenu from './menu';
 import {scrapeAllIrasuto, Irasuto} from 'node-irasutoya';
 

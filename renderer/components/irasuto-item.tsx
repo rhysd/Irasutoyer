@@ -45,6 +45,23 @@ export default class IrasutoItem extends React.Component<Props, {}> {
         }
     }
 
+    renderLabel(text: string, key: string) {
+        const style = {
+            backgroundColor: '#aaaaaa',
+            color: 'white',
+            marginLeft: '4px',
+            padding: '2px',
+            fontSize: '0.8em',
+            wordWrap: 'normal',
+            whiteSpace: 'nowrap',
+            borderRadius: '2px',
+            boxSizing: 'border-box',
+        };
+        return (
+            <span style={style} key={key}>{text}</span>
+        );
+    }
+
     render() {
         const {irasuto, key} = this.props;
 
@@ -76,6 +93,13 @@ export default class IrasutoItem extends React.Component<Props, {}> {
             />
         );
 
+        const secondaryText = (
+            <p>
+                <span>{irasuto.description}</span>
+                {irasuto.categories.map((c, i) => this.renderLabel(c, `${key}-${i}`))}
+            </p>
+        );
+
         return (
             <div key={key}>
                 <ListItem
@@ -83,7 +107,8 @@ export default class IrasutoItem extends React.Component<Props, {}> {
                     innerDivStyle={divStyle}
                     rightIconButton={rightIconMenu}
                     primaryText={irasuto.name}
-                    secondaryText={irasuto.categories.join(' ')}
+                    secondaryText={secondaryText}
+                    secondaryTextLines={2}
                     style={{height: '108px'}}
                     onTouchTap={() => openExternal(irasuto.detail_url)}
                 />
