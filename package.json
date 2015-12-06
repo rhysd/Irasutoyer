@@ -1,7 +1,7 @@
 {
   "name": "irasutoyer",
   "productName": "Irasutoyer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Desktop client for Irasutoya",
   "main": "build/browser/main.js",
   "bin": {

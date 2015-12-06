@@ -21,18 +21,13 @@ $ npm install -g irasutoyer electron-prebuilt
 $ irasutoyer
 ```
 
+Currently Irasutoyer is only distributed as npm package.  If you want packed isolated package, please let me know by creating issue.
 
 ## Usage
 
-At first start, app automatically scrapes illustration links (spinning the right above circle).
-It takes long time (10 minutes or more).  I recommend you to make a cup of coffee and have a break :coffee:.
+All illustrations are listed in window.  You can search incrementally by entering search words to a text area on the top of window.
 
-![scraping](https://raw.githubusercontent.com/rhysd/ss/master/Irasutoyer/scraping.gif)
-
-After scraping succeeds, all illustrations would be listed in window.  You can search incrementally by entering search words to a text area on the top of window.
-All links are cached as json in user directory.  If you want to update the cache, click the circle button on right above of the window.
-
-If you find the illustration you want, click the item in list to open illustration page in browser.  You can also click 'Actions' button in right hand side of item.
+When you find the illustration you want, click the item in list to open illustration page in browser.  You can also click 'Actions' button in right hand side of item.
 You can do below actions as well.
 
 - Copy URL to clipboard
@@ -40,7 +35,11 @@ You can do below actions as well.
 - Copy thumbnail image to clipboard
 - Open category page in your browser
 
-![item actions](https://raw.githubusercontent.com/rhysd/ss/master/Irasutoyer/menu-items.gif)
+![item actions](https://raw.githubusercontent.com/rhysd/ss/master/Irasutoyer/menu-items.png)
+
+Illustrations on いらすとや are frequently updated everyday.  If you want to follow up to the update, please scrape again by clicking the circle button on right above of the window.  It takes long time (10 minutes or more).  I recommend you to make a cup of coffee and have a break :coffee:.  Scraping result is preserved in user directory as JSON.
+
+![scraping](https://raw.githubusercontent.com/rhysd/ss/master/Irasutoyer/scraping.gif)
 
 ## Development
 
