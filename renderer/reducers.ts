@@ -1,7 +1,8 @@
 import {Irasuto} from 'node-irasutoya';
 import assign = require('object-assign');
-import {Kind, ActionType} from './actions';
 import path = require('path');
+import shuffle = require('shuffle-array');
+import {Kind, ActionType} from './actions';
 
 const readFileSync = global.require('fs').readFileSync as (filename: string, encoding: string) => string;
 
@@ -41,7 +42,7 @@ function init(): StateType {'use strict';
     };
 
     if (contents !== null) {
-        s.irasutoya = JSON.parse(contents);
+        s.irasutoya = shuffle(JSON.parse(contents) as Irasuto[]);
         s.candidates = s.irasutoya;
     } else {
         ipc.send('scraping:start');

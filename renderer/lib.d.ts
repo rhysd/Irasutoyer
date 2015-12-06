@@ -1,5 +1,6 @@
 /// <reference path="../typings/tsd.d.ts" />
 /// <reference path="./react-infinite.d.ts" />
+/// <reference path="./shuffle-array.d.ts" />
 
 declare module NodeJS {
     interface Global {
