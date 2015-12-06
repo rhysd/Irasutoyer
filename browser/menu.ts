@@ -35,6 +35,11 @@ export default function setMenu() {
                     accelerator: 'CmdOrCtrl+V',
                     role: 'paste'
                 },
+                {
+                    label: 'Select All',
+                    accelerator: 'CmdOrCtrl+A',
+                    role: 'selectall',
+                },
             ]
         },
 
