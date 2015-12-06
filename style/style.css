@@ -23,3 +23,14 @@ html, body, .app {
   margin: 8px;
   cursor: pointer;
 }
+
+.category-label {
+  box-sizing: border-box;
+  background-color: #aaaaaa;
+  color: white;
+  margin-left: 4px;
+  padding: 2px;
+  font-size: 0.8em;
+  white-space: nowrap;
+  border-radius: 2px;
+}
