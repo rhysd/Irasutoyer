@@ -43,7 +43,6 @@ Illustrations on いらすとや are frequently updated everyday.  If you want t
 
 ## (Maybe) TODO
 
-- Shuffle first look
 - Search categories
 - Search illustrations in specific category
 
