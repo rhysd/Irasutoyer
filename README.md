@@ -14,6 +14,7 @@ This application is built on [Electron](https://github.com/atom/electron), [Reac
 
 ## Installation
 
+- [Package releases](https://github.com/rhysd/Irasutoyer/releases)
 - [npm](https://www.npmjs.com/) package
 
 ```
