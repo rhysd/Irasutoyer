@@ -41,6 +41,12 @@ Illustrations on いらすとや are frequently updated everyday.  If you want t
 
 ![scraping](https://raw.githubusercontent.com/rhysd/ss/master/Irasutoyer/scraping.gif)
 
+## (Maybe) TODO
+
+- Shuffle first look
+- Search categories
+- Search illustrations in specific category
+
 ## Development
 
 I use Ruby and `rake` for build scripts.
