@@ -7,7 +7,7 @@ import App from './components/app';
 import {endScraping, failedScraping} from './actions';
 import Store from './store';
 
-const ipc: ElectronRenderer.InProcess = global.require('ipc');
+const ipcRenderer = global.require('electron').ipcRenderer;
 
 ReactDom.render(
     <Provider store={Store}>
@@ -16,11 +16,11 @@ ReactDom.render(
     document.querySelector('.app')
 );
 
-ipc.on('scraping:end', () => {
+ipcRenderer.on('scraping:end', () => {
     Store.dispatch(endScraping());
 });
 
-ipc.on('scraping:error', (e: Error) => {
+ipcRenderer.on('scraping:error', (e: Error) => {
     Store.dispatch(failedScraping(e));
 });
 

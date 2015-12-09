@@ -9,11 +9,10 @@ import ListItem = require('material-ui/lib/lists/list-item');
 import ListDivider = require('material-ui/lib/lists/list-divider');
 import {TouchTapEvent} from 'material-ui';
 
-const openExternal = global.require('shell').openExternal as (uri: string) => boolean;
-const clipboard = global.require('clipboard');
-const writeText: (text: string, type?: string) => void = clipboard.writeText;
-const writeImage: (image: GitHubElectron.NativeImage) => void = clipboard.writeImage;
-const NativeImage = global.require('native-image') as typeof GitHubElectron.NativeImage;
+const electron = global.require('electron');
+const openExternal = electron.shell.openExternal;
+const clipboard = electron.clipboard;
+const nativeImage = electron.nativeImage;
 
 interface Props {
     irasuto: Irasuto;
@@ -28,15 +27,15 @@ export default class IrasutoItem extends React.Component<Props, {}> {
 
         switch (item.key) {
             case 'copy-url-to-clipboard': {
-                writeText(irasuto.detail_url);
+                clipboard.writeText(irasuto.detail_url);
                 break;
             }
             case 'copy-md-link-to-clipboard': {
-                writeText(`[${irasuto.name}](${irasuto.detail_url})`);
+                clipboard.writeText(`[${irasuto.name}](${irasuto.detail_url})`);
                 break;
             }
             case 'copy-image-to-clipboard': {
-                writeImage(NativeImage.createFromDataURL(irasuto.image_url));
+                clipboard.writeImage((nativeImage as any).createFromDataURL(irasuto.image_url)); // XXX
                 break;
             }
             default:

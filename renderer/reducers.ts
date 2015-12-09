@@ -6,10 +6,10 @@ import {Kind, ActionType} from './actions';
 
 const readFileSync = global.require('fs').readFileSync as (filename: string, encoding: string) => string;
 
-const ipc: ElectronRenderer.InProcess = global.require('ipc');
-const remote: ElectronRenderer.Remote = global.require('remote');
-const openExternal: (url: string) => boolean = global.require('shell').openExternal;
-const AppPath: string = remote.require('app').getAppPath();
+const electron = global.require('electron');
+const remote = electron.remote;
+const openExternal = global.require('electron').shell.openExternal;
+const AppPath: string = remote.require('electron').app.getAppPath();
 
 export interface StateType {
     irasutoya: Irasuto[];
@@ -45,7 +45,7 @@ function init(): StateType {'use strict';
         s.irasutoya = shuffle(JSON.parse(contents) as Irasuto[]);
         s.candidates = s.irasutoya;
     } else {
-        ipc.send('scraping:start');
+        electron.ipcRenderer.send('scraping:start');
         s.now_scraping = true;
     }
 
@@ -81,7 +81,7 @@ function searchUpdate(state: StateType, new_input: string) {'use strict';
 
 function startScraping(state: StateType) {'use strict';
     const next_state = assign({}, state, {now_scraping: true});
-    ipc.send('scraping:start');
+    electron.ipcRenderer.send('scraping:start');
     return next_state;
 }
 

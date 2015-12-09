@@ -1,8 +1,6 @@
 import path = require('path');
 import fs = require('fs');
-import app = require('app');
-import BrowserWindow = require('browser-window');
-import ipc = require('ipc');
+import { app, BrowserWindow, ipcMain } from 'electron';
 import setMenu from './menu';
 import {scrapeAllIrasuto, Irasuto} from 'node-irasutoya';
 
@@ -13,8 +11,8 @@ app.on('ready', () => {
     let win = new BrowserWindow({
         width: 800,
         height: 1000,
-        'title-bar-style': process.platform === 'darwin' ? 'hidden-inset' : undefined,
-        'use-content-size': true,
+        titleBarStyle: process.platform === 'darwin' ? 'hidden-inset' : undefined,
+        useContentSize: true,
     });
 
     win.on('closed', () => {
@@ -27,7 +25,7 @@ app.on('ready', () => {
     setMenu();
 });
 
-ipc.on('scraping:start', (event: any) => {
+ipcMain.on('scraping:start', (event: any) => {
     const sender: GitHubElectron.WebContents = event.sender;
     scrapeAllIrasuto({retry: 3, verbose: true})
         .then((is: Irasuto[]) => JSON.stringify(is))

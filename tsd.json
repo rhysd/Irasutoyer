@@ -17,12 +17,6 @@
     "redux/redux.d.ts": {
       "commit": "7a3d6944036902996b87981e6150900952b35628"
     },
-    "github-electron/github-electron.d.ts": {
-      "commit": "7a3d6944036902996b87981e6150900952b35628"
-    },
-    "github-electron/github-electron-main.d.ts": {
-      "commit": "7a3d6944036902996b87981e6150900952b35628"
-    },
     "react-redux/react-redux.d.ts": {
       "commit": "7a3d6944036902996b87981e6150900952b35628"
     },

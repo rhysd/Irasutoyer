@@ -1,6 +1,4 @@
-import Menu = require('menu');
-import app = require('app');
-import {openExternal} from 'shell';
+import {Menu, app, shell} from 'electron';
 
 export default function setMenu() {
     const template = [
@@ -93,11 +91,11 @@ export default function setMenu() {
             submenu: [
                 {
                     label: 'Repository Page',
-                    click: () => { openExternal('https://github.com/rhysd/Irasutoyer') }
+                    click: () => { shell.openExternal('https://github.com/rhysd/Irasutoyer') }
                 },
                 {
                     label: 'いらすとや',
-                    click: () => { openExternal('http://www.irasutoya.com/') }
+                    click: () => { shell.openExternal('http://www.irasutoya.com/') }
                 },
             ]
         },
